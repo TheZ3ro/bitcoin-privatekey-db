@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<title>Bitcoin private key lottery</title>
+<link rel="stylesheet" type="text/css" href="/static/main.css">
+</head>
+<body>
+<h1>Bitcoin private key lottery</h1>
+<p>
+  <button id="try" onclick="javascript:fetchPrivateKey()">Try your Luck and Win Bitcoins!!</button>
+  <div id="message"></div>
+</p>
+<hr/>
+<p>
+<a href="https://github.com/TheZ3ro/bitcoin-privatekey-db">Source code</a><br/>
+Donate BTC: 1EhJyJwzbp7v2ixPT4heM2caUsmWcX36mc<br/>
+Monero: 47Yk8KgtYyaV2RvzJLQKuuMzhiZD5ktdbNzP6jxsjkdSKD8j81uLRCYXKLFVFtsCbLjbyamGBES58Mi4r8wHEGht8ofEVu7
+</p>
+<script>
+function log(str) {
+  document.getElementById('message').innerHTML += str + "<br/>"
+}
+
+function displayWin() {
+  balance = parseInt(this.responseText)/100000000;
+  log("Balance: "+balance+" BTC")
+  if (balance > 0) {
+    alert("YOU WON!");
+    log("YOU WON!");
+  } else {
+    log("No luck :(");
+  }
+}
+
+function getBalance(addr) {
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", displayWin);
+  oReq.open("GET", "https://blockchain.info/q/addressbalance/"+addr);
+  oReq.send();
+}
+
+function checkBalance() {
+  addr = this.responseText.split(' ')
+  log("Got Private Key "+addr[0]);
+  log("Got Address "+addr[1])
+  log("Checking balance...");
+  getBalance(addr[1]);
+}
+
+function getPair() {
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", checkBalance);
+  oReq.open("GET", "/gen_pair");
+  oReq.send();
+}
+
+function fetchPrivateKey() {
+  document.getElementById('message').innerHTML = "";
+  log("Getting random Private Key / Address pair...");
+  getPair();
+}
+</script>
+</body>
+</html>

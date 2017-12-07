@@ -1,0 +1,8 @@
+body{font-size: 9pt; font-family: sans-serif;}
+table{font-family: monospace;}
+td{padding: 0px 5px;}
+a{text-decoration: none}
+a:hover {text-decoration: underline}
+thead tr th { background: #9fd8ef; }
+table tr:hover td { background: #f0f0f0; }
+tr:target { background: #ccffcc; }

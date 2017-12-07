@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<title>Page: {{page}}</title>
+<link rel="stylesheet" type="text/css" href="/static/main.css">
+</head>
+<body>
+<h1>Bitcoin private key database</h1>
+<h3>Page {{page}} of {{max_pages}}</h3>
+<p>
+<a href="{{page-1}}">previous</a> - <a href="{{page+1}}">next</a>
+</p>
+<table>
+  <thead>
+    <th>Private Key</th>
+    <th>Address</th>
+    <th>Compressed Address</th>
+  </thead>
+  <tbody>
+{% for row in page_elements %}
+    <tr>
+      <td><a href="/key/{{ row[0] }}" title="{{ row[0] }}">{{ row[1] }}</a></td>
+      <td><a href="https://blockchain.info/address/{{ row[2] }}">{{ row[2] }}</a></td>
+      <td><a href="https://blockchain.info/address/{{ row[3] }}">{{ row[3] }}</a></td>
+    </tr>
+{% endfor %}
+  </tbody>  
+</table>
+<p>
+<a href="{{page-1}}">previous</a> - <a href="{{page+1}}">next</a>
+</p>
+<hr/>
+<p>
+Return to the <a href="/">homepage</a> or <a href="javascript:window.history.back()">go back</a>
+</p>
+<p>
+<a href="https://github.com/TheZ3ro/bitcoin-privatekey-db">Source code</a><br/>
+Donate BTC: 1EhJyJwzbp7v2ixPT4heM2caUsmWcX36mc<br/>
+Monero: 47Yk8KgtYyaV2RvzJLQKuuMzhiZD5ktdbNzP6jxsjkdSKD8j81uLRCYXKLFVFtsCbLjbyamGBES58Mi4r8wHEGht8ofEVu7
+</p>
+</body>
+</html>
